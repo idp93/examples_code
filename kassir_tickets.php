@@ -1,5 +1,6 @@
 <?php
 class Update_Tickets{
+	var $key = "****";//key
 	//Указывает ID своей организаци для выбора
 	var $def_venue = 449;
 	//Указывает ID полей для обновления данных по выбору
@@ -25,12 +26,11 @@ class Update_Tickets{
 	*  @return	(array)
 	*/
 	function get_kassir_tickets($venue){
-		$key = "****";//key
-		$xml_feed = file_get_contents("https://spb.kassir.ru/frame/feed/xml?key=".$key);
+		$xml_feed = file_get_contents("https://spb.kassir.ru/frame/feed/xml?key=".$this->key);
 		$xml_feed = simplexml_load_string($xml_feed);
 		$res_items = array();
 		$res_actions = array();
-		foreach($xml_feed->vanus->item as $item){
+		foreach($xml_feed->venues->item as $item){
 			
 		}
 		foreach($xml_feed->events->item as $item){
