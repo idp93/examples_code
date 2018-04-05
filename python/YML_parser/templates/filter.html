@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <title>YML parser</title>
+    </head>
+    <body>
+        <div class="container" style="margin-top:50px;">
+            <div class="row">
+				{% if data.error %}
+					<div class="alert alert-danger" role="alert">
+					{{data.error}}
+					</div>
+				{% endif %}
+                <div class="col-md-8 col-md-offset-2">
+                <form action="" method="POST">
+                    <input type="hidden" name="step" value="2"/>
+                    <h3></h3>
+                    <div class="form-group">
+							<label>Категории</label>
+                            <div class="form-check">
+                            {% for cat in data.categories %}
+                            <input type="checkbox" value="{{ cat.Id }}" id="cat{{ cat.Id }}" name="categories[]" class="form-check-input" checked="checked">
+                            <label class="form-check-label" for="cat{{ cat.Id }}">{{ cat.text }}</label><br/>
+                            {% endfor %}
+                            </div>
+                    </div>
+                    <div class="form-group">
+						<label for="file">Артикулы включенные в выгрузку</label>
+                        <select name="articles_in[]" multiple="multiple" class="form-control" height="150px">
+                            <option value="">Не выбраны</option>
+                            {% for article in data.articles %}
+                                <option value="{{ article }}"> {{ article }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+						<label for="file">Артикулы исключенные из выгрузки</label>
+                        <select name="articles_out[]" multiple="multiple" class="form-control" height="150px">
+                            <option value="">Не выбраны</option>
+                            {% for article in data.articles %}
+                                <option value="{{ article }}"> {{ article }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Фильтровать">
+                </form>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
